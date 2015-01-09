@@ -1,0 +1,5 @@
+audio backgroundTrack
+{
+    path = res/background_track.ogg
+    looped = true
+}
