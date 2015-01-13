@@ -3,3 +3,8 @@ audio backgroundTrack
     path = res/background_track.ogg
     looped = true
 }
+
+audio braking
+{
+    path = res/braking.wav
+}

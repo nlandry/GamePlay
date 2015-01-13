@@ -59,10 +59,10 @@ private:
      */
     bool drawScene(Node* node);
 
-    Scene* _scene;
-    bool _wireframe;
-    Form* _form;
-    AudioSource* _audioSource;
+    Form* _formBackground;
+    Form* _formBraking;
+    AudioSource* _audioBackgroundSource;
+    AudioSource* _audioBrakingSource;
 };
 
 #endif

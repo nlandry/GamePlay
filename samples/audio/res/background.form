@@ -1,8 +1,14 @@
-form audioControls
+form backgroundControls
 {
     layout = LAYOUT_VERTICAL
-    alignment = ALIGN_BOTTOM_HCENTER
+    alignment = ALIGN_TOP_LEFT
     size = 270, 430
+
+    label title
+    {
+        text = Background Track
+        fontSize = 32
+    }
 
     button playButton
     {
