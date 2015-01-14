@@ -1,11 +1,11 @@
 #include "AudioSample.h"
 
 #if defined(ADD_SAMPLE)
-    ADD_SAMPLE("Media", "Audio", AudioSample, 2);
+    ADD_SAMPLE("Media", "Sound Player", AudioSample, 2);
 #endif
 
 AudioSample::AudioSample()
-    :  _formBackground(NULL), _formBraking(NULL),  _audioBackgroundSource(NULL), _audioBrakingSource(NULL)
+    :  _formBackground(NULL), _formBraking(NULL),  _formEngine(NULL), _audioBackgroundSource(NULL), _audioBrakingSource(NULL), _audioEngineSource(NULL)
 {
 }
 
@@ -21,6 +21,7 @@ void AudioSample::initialize()
 
     // Create the audio source here, and feed the values into the UI controls.
     _audioBackgroundSource = AudioSource::create("res/common/audio/sample.audio#backgroundTrack");
+    _audioBackgroundSource->play();
 
     CheckBox* checkBox = static_cast<CheckBox*>(_formBackground->getControl("loopCheckBox"));
     checkBox->setChecked(_audioBackgroundSource->isLooped());
@@ -39,6 +40,9 @@ void AudioSample::initialize()
     Button* button = static_cast<Button*>(_formBraking->getControl("playBrakingButton"));
     button->addListener(this, Control::Listener::RELEASE);
 
+    button = static_cast<Button*>(_formBraking->getControl("stopBrakingButton"));
+    button->addListener(this, Control::Listener::RELEASE);
+
     _audioBrakingSource = AudioSource::create("res/common/audio/sample.audio#braking");
 
     checkBox = static_cast<CheckBox*>(_formBraking->getControl("loopBrakingCheckBox"));
@@ -52,10 +56,34 @@ void AudioSample::initialize()
     slider = static_cast<Slider*>(_formBraking->getControl("pitchBrakingSlider"));
     slider->setValue(_audioBrakingSource->getPitch());
     slider->addListener(this, Control::Listener::VALUE_CHANGED);
+
+    _formEngine = Form::create("res/common/audio/engine.form");
+
+    button = static_cast<Button*>(_formEngine->getControl("playEngineButton"));
+    button->addListener(this, Control::Listener::RELEASE);
+
+    button = static_cast<Button*>(_formEngine->getControl("stopEngineButton"));
+    button->addListener(this, Control::Listener::RELEASE);
+
+    _audioEngineSource = AudioSource::create("res/common/audio/sample.audio#engine");
+
+    checkBox = static_cast<CheckBox*>(_formEngine->getControl("loopEngineCheckBox"));
+    checkBox->setChecked(_audioEngineSource->isLooped());
+    checkBox->addListener(this, Control::Listener::VALUE_CHANGED);
+
+    slider = static_cast<Slider*>(_formEngine->getControl("gainEngineSlider"));
+    slider->setValue(_audioEngineSource->getGain());
+    slider->addListener(this, Control::Listener::VALUE_CHANGED);
+
+    slider = static_cast<Slider*>(_formEngine->getControl("pitchEngineSlider"));
+    slider->setValue(_audioEngineSource->getPitch());
+    slider->addListener(this, Control::Listener::VALUE_CHANGED);
 }
 
 void AudioSample::finalize()
 {
+    SAFE_RELEASE(_audioEngineSource);
+    SAFE_RELEASE(_formEngine);
     SAFE_RELEASE(_audioBackgroundSource);
     SAFE_RELEASE(_formBraking);
     SAFE_RELEASE(_audioBackgroundSource);
@@ -66,6 +94,7 @@ void AudioSample::update(float elapsedTime)
 {
     _formBackground->update(elapsedTime);
     _formBraking->update(elapsedTime);
+    _formEngine->update(elapsedTime);
 }
 
 void AudioSample::render(float elapsedTime)
@@ -76,6 +105,7 @@ void AudioSample::render(float elapsedTime)
     // Visit all the nodes in the scene for drawing
     _formBackground->draw();
     _formBraking->draw();
+    _formEngine->draw();
 }
 
 void AudioSample::controlEvent(Control* control, EventType eventType)
@@ -95,6 +125,12 @@ void AudioSample::controlEvent(Control* control, EventType eventType)
             _audioBackgroundSource->stop();
         } else if (strcmp("playBrakingButton", control->getId()) == 0) {
             _audioBrakingSource->play();
+        } else if (strcmp("stopBrakingButton", control->getId()) == 0) {
+            _audioBrakingSource->stop();
+        } else if (strcmp("playEngineButton", control->getId()) == 0) {
+            _audioEngineSource->play();
+        } else if (strcmp("stopEngineButton", control->getId()) == 0) {
+            _audioEngineSource->stop();
         }
         break;
     case Control::Listener::VALUE_CHANGED:
@@ -121,6 +157,18 @@ void AudioSample::controlEvent(Control* control, EventType eventType)
             float pitchValue = (float)pitchSlider->getValue();
             if (pitchValue != 0.0f) {
                 _audioBrakingSource->setPitch(pitchValue);
+            }
+        } else if (strcmp("loopEngineCheckBox", control->getId()) == 0) {
+            CheckBox* loopCheckBox = static_cast<CheckBox*>(control);
+            _audioEngineSource->setLooped(loopCheckBox->isChecked());
+        } else if (strcmp("gainEngineSlider", control->getId()) == 0) {
+            Slider* gainSlider = static_cast<Slider*>(control);
+            _audioEngineSource->setGain(float(gainSlider->getValue()));
+        } else if (strcmp("pitchEngineSlider", control->getId()) == 0) {
+            Slider* pitchSlider = static_cast<Slider*>(control);
+            float pitchValue = (float)pitchSlider->getValue();
+            if (pitchValue != 0.0f) {
+                _audioEngineSource->setPitch(pitchValue);
             }
         }
         break;

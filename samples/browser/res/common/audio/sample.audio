@@ -8,3 +8,8 @@ audio braking
 {
     path = res/common/audio/braking.wav
 }
+
+audio engine
+{
+    path = res/common/audio/engine_loop.ogg
+}

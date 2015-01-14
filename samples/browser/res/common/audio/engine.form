@@ -1,27 +1,27 @@
-form brakeControls
+form engineControls
 {
     layout = LAYOUT_VERTICAL
-    alignment = ALIGN_BOTTOM_HCENTER
+    alignment = ALIGN_BOTTOM_RIGHT
     size = 270, 430
 
-    label titleBraking
+    label titleEngine
     {
-        text = Sound Effect #1
+        text = Sound Effect #2
         fontSize = 32
     }
 
-    button playBrakingButton
+    button playEngineButton
     {
         text = Play
         size = 250, 50
     }
 
-    checkbox loopBrakingCheckBox
+    checkbox loopEngineCheckBox
     {
         text = Loop Audio
     }
 
-	slider gainBrakingSlider
+	slider gainEngineSlider
 	{
 		width = 250
 		orientation = HORIZONTAL
@@ -32,7 +32,7 @@ form brakeControls
 		valueTextVisible = false
 	}
 
-	slider pitchBrakingSlider
+	slider pitchEngineSlider
 	{
 		width = 250
 		orientation = HORIZONTAL

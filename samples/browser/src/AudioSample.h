@@ -27,8 +27,10 @@ private:
     
     Form* _formBackground;
     Form* _formBraking;
+    Form* _formEngine;
     AudioSource* _audioBackgroundSource;
     AudioSource* _audioBrakingSource;
+    AudioSource* _audioEngineSource;
 };
 
 #endif

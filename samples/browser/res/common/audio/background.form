@@ -6,7 +6,7 @@ form backgroundControls
 
     label title
     {
-        text = Background Track
+        text = Background Music
         fontSize = 32
     }
 
