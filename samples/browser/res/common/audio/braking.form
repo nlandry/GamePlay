@@ -1,7 +1,7 @@
 form brakeControls
 {
     layout = LAYOUT_VERTICAL
-    alignment = ALIGN_BOTTOM_HCENTER
+    alignment = ALIGN_VCENTER_HCENTER
     size = 270, 430
 
     label titleBraking
@@ -13,6 +13,12 @@ form brakeControls
     button playBrakingButton
     {
         text = Play
+        size = 250, 50
+    }
+
+    button stopBrakingButton
+    {
+        text = Stop
         size = 250, 50
     }
 

@@ -1,7 +1,7 @@
 form engineControls
 {
     layout = LAYOUT_VERTICAL
-    alignment = ALIGN_BOTTOM_RIGHT
+    alignment = ALIGN_VCENTER_RIGHT
     size = 270, 430
 
     label titleEngine
@@ -13,6 +13,12 @@ form engineControls
     button playEngineButton
     {
         text = Play
+        size = 250, 50
+    }
+
+    button stopEngineButton
+    {
+        text = Stop
         size = 250, 50
     }
 

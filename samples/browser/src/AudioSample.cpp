@@ -1,7 +1,7 @@
 #include "AudioSample.h"
 
 #if defined(ADD_SAMPLE)
-    ADD_SAMPLE("Media", "Sound Player", AudioSample, 2);
+    ADD_SAMPLE("Media", "Audio Player", AudioSample, 2);
 #endif
 
 AudioSample::AudioSample()

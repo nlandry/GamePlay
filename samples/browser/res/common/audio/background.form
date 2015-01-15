@@ -1,7 +1,7 @@
 form backgroundControls
 {
     layout = LAYOUT_VERTICAL
-    alignment = ALIGN_BOTTOM_LEFT
+    alignment = ALIGN_VCENTER_LEFT
     size = 270, 430
 
     label title
